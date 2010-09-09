@@ -3,19 +3,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 public class MainWindow extends JPanel {
-
 	private static final long[][] ACORN = new long[][] { { 0, 0 }, { 1, 0 },
 			{ 1, -2 }, { 3, -1 }, { 4, 0 }, { 5, 0 }, { 6, 0 } };
 	private static final long serialVersionUID = 1L;
-	private static Timer timer;
 	private final GameOfLife game;
 
 	public MainWindow() {
@@ -43,27 +37,6 @@ public class MainWindow extends JPanel {
 			g2d.drawRect(x, y, zoom, zoom);
 			g2d.fillRect(x, y, zoom, zoom);
 		}
-
-	}
-
-	public static void main(String[] args) throws InterruptedException {
-		final MainWindow points = new MainWindow();
-		final JFrame frame = new JFrame("Points");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(points);
-		frame.setSize(500, 400);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-
-		timer = new Timer(500, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				points.game.step();
-				timer.restart();
-				frame.repaint();
-			}
-		});
-		timer.start();
 	}
 
 	public void step() {
