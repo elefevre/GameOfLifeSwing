@@ -57,6 +57,17 @@ public class GameOfLifeTest {
 	}
 
 	@Test
+	public void initialLiveCellsRemovePreviousLiveCells() {
+		GameOfLife life = new GameOfLife();
+
+		life.setInitialLiveCells(new long[][] { { 0, 0 } });
+		life.setInitialLiveCells(new long[][] { { 2, 4 } });
+
+		assertFalse(life.isCellAlive(0, 0));
+		assertTrue(life.isCellAlive(2, 4));
+	}
+
+	@Test
 	public void returnsAllLiveCells() {
 		GameOfLife life = new GameOfLife();
 

@@ -117,12 +117,12 @@ public class GameOfLife {
 				return false;
 			return true;
 		}
-
 	}
 
-	public void setInitialLiveCells(long[][] liveCells) {
-		for (int i = 0; i < liveCells.length; i++) {
-			long[] coordinates = liveCells[i];
+	public void setInitialLiveCells(long[][] initialLiveCells) {
+		replaceWithContentOf(this.liveCells, new HashSet<Coordinates>());
+		for (int i = 0; i < initialLiveCells.length; i++) {
+			long[] coordinates = initialLiveCells[i];
 			turnCellAlive(coordinates[0], coordinates[1]);
 		}
 	}

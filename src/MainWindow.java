@@ -1,10 +1,17 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JToolBar;
 
 public class MainWindow extends JPanel {
 	private static final long[][] ACORN = new long[][] { { 0, 0 }, { 1, 0 },
@@ -13,8 +20,38 @@ public class MainWindow extends JPanel {
 	private final GameOfLife game;
 
 	public MainWindow() {
+		super(new BorderLayout());
+
+		JToolBar toolBar = new JToolBar("Still draggable");
+		addButtons(toolBar);
+		add(toolBar, BorderLayout.PAGE_START);
+
 		game = new GameOfLife();
 		game.setInitialLiveCells(ACORN);
+	}
+
+	private void addButtons(JToolBar toolBar) {
+		toolBar.add(makeNavigationButton("Delete24", "CLEAR", "Clear screen",
+				"Clear"));
+	}
+
+	protected JButton makeNavigationButton(String imageName,
+			String actionCommand, String toolTipText, String altText) {
+		String imgLocation = "toolbarButtonGraphics/general/" + imageName
+				+ ".gif";
+		URL imageURL = getClass().getResource(imgLocation);
+
+		JButton button = new JButton();
+		button.setActionCommand(actionCommand);
+		button.setToolTipText(toolTipText);
+		button.setIcon(new ImageIcon(imageURL, altText));
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+
+		return button;
 	}
 
 	@Override
